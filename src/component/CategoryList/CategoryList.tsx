@@ -45,7 +45,7 @@ const CategoryList: React.FC<Props> = ({ CategoryLists }) => {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size='small'>Add to Whish List</Button>
+                  <Button size='small'>WhishList</Button>
                   <Button size='small'>Buy</Button>
                 </CardActions>
               </Card>

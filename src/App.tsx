@@ -1,7 +1,11 @@
 import { Container } from '@mui/material';
+import { Route, Routes } from 'react-router-dom';
 import './App.scss';
+import NoFound from './pages/NotFound/index';
 import HeaderNavBar from './component/NavBar/NavBar';
 import ShopHome from './pages/ShopHome/index';
+import CheckOutCart from './pages/CheckOutCart/index';
+import ProductDetails from './pages/ProductDetails/index';
 
 function App() {
   const itemLists = [
@@ -26,7 +30,12 @@ function App() {
         <HeaderNavBar />
       </header>
       <Container fixed>
-        <ShopHome CategoryLists={itemLists} />
+        <Routes>
+          <Route path='*' element={<NoFound />} />
+          <Route path='/' element={<ShopHome CategoryLists={itemLists} />} />
+          <Route path='/cart' element={<CheckOutCart />} />
+          <Route path='/details' element={<ProductDetails />} />
+        </Routes>
       </Container>
     </div>
   );
