@@ -6,10 +6,12 @@ import HeaderNavBar from './component/NavBar/NavBar';
 import ShopHome from './pages/ShopHome/index';
 import CheckOutCart from './pages/CheckOutCart/index';
 import ProductDetails from './pages/ProductDetails/index';
+import { getAllProduct } from './lib/api';
 
 function App() {
   const itemLists = [
     {
+      id: 1,
       category: 'electronic',
       picture: 'https://dummyimage.com/600x400',
       name: 'Computer',
@@ -17,6 +19,7 @@ function App() {
       price: 25000,
     },
     {
+      id: 2,
       category: 'electronic',
       picture: 'https://dummyimage.com/600x400',
       name: 'Camera',
@@ -24,6 +27,10 @@ function App() {
       price: 5000,
     },
   ];
+
+  const get = getAllProduct();
+  console.log('get', get);
+
   return (
     <div>
       <header>
@@ -31,10 +38,10 @@ function App() {
       </header>
       <Container fixed>
         <Routes>
-          <Route path='*' element={<NoFound />} />
+          {/* <Route path='*' element={<NoFound />} /> */}
           <Route path='/' element={<ShopHome CategoryLists={itemLists} />} />
           <Route path='/cart' element={<CheckOutCart />} />
-          <Route path='/details' element={<ProductDetails />} />
+          <Route path='/detail/:id' element={<ProductDetails />} />
         </Routes>
       </Container>
     </div>
