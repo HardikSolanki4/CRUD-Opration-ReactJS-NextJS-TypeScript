@@ -1,52 +1,70 @@
-import React, { useCallback, useReducer } from "react"
+import { useCallback, useReducer } from "react"
 
-interface httpInterface {
-    status: string,
-    data: string,
-    error: string
+// type typeHttpState = {
+//     status: string,
+//     data: string,
+//     error: string
+// }
+
+type typeHttpAction =
+    | {
+        type: 'SEND'
+    } | {
+        type: 'SUCCESS'
+        responseData: any
+    } | {
+        type: 'ERROR'
+        errorMessage: any
+    }
+
+function httpReducer(state: any, action: typeHttpAction) {
+    switch (action.type) {
+        case 'SEND':
+            return {
+                status: 'PENDING',
+                data: null,
+                error: null
+            }
+            break;
+        case 'SUCCESS':
+            return {
+                status: 'COMPLETED',
+                data: action.responseData,
+                error: null
+            }
+            break;
+        case 'ERROR':
+            return {
+                status: 'ERROR',
+                data: null,
+                error: action.errorMessage
+            }
+            break;
+        default:
+            return state
+            break;
+    }
 }
 
-interface httpAction {
-    [x: string]: any
-    type: string
-}
-
-function httpReducer(state: httpInterface, action: httpAction) {
-    if (action.type === 'SEND') {
-        return {
-            status: 'pending',
-            data: null,
-            error: null
-        }
-    }
-    if (action.type === 'SUCCESS') {
-        return {
-            status: 'completed',
-            data: action.responseData,
-            error: null
-        }
-    }
-    if (action.type === 'ERROR') {
-        return {
-            status: 'error',
-            data: null,
-            error: action.errorMessage
-        }
-    }
-    return state;
-}
-
-const useHttp = (requestFunction, startWithPending = false) => {
-    // const [httpStatus, dispatch] = useReducer(httpReducer:httpInterface, {});
-    const sendRequest = useCallback(async (reqParameter) => {
+const useHttp = (requestFunction: (arg0: any) => any, startWithPending = false) => {
+    const [httpStatus, dispatch] = useReducer(httpReducer, {
+        status: startWithPending ? 'pending' : null,
+        data: null,
+        error: null
+    });
+    const sendRequest = useCallback(async function (reqParameter) {
+        dispatch({ type: 'SEND' });
         try {
-            const responseData = requestFunction(reqParameter);
-
+            const responseData = await requestFunction(reqParameter);
+            await dispatch({ type: 'SUCCESS', responseData: responseData });
         } catch (error) {
-
+            dispatch({ type: 'ERROR', errorMessage: error });
         }
     }, [requestFunction])
-
+    return {
+        sendRequest,
+        ...httpStatus
+    }
 }
 
 export { useHttp }

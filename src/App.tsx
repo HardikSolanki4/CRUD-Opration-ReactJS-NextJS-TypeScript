@@ -6,7 +6,6 @@ import HeaderNavBar from './component/NavBar/NavBar';
 import ShopHome from './pages/ShopHome/index';
 import CheckOutCart from './pages/CheckOutCart/index';
 import ProductDetails from './pages/ProductDetails/index';
-import { getAllProduct } from './lib/api';
 
 function App() {
   const itemLists = [
@@ -27,9 +26,6 @@ function App() {
       price: 5000,
     },
   ];
-
-  const get = getAllProduct();
-  console.log('get', get);
 
   return (
     <div>
