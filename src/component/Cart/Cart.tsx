@@ -1,5 +1,5 @@
 import { Button, TextField } from '@mui/material';
-import { ShopCartStyled } from './ShopCartStyled';
+import { ShopCartStyled } from './CartStyled';
 
 const ShopCart = () => {
   return (

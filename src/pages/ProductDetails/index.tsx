@@ -4,9 +4,7 @@ import Details from '../../component/Details/Details';
 import { useHttp } from '../../hooks/use-http';
 import { getProductDetails } from '../../lib/api';
 
-export interface IProductDetailsProps {}
-
-export default function ProductDetails(props: IProductDetailsProps) {
+const ProductDetails: React.FC = () => {
   const {
     sendRequest,
     status,
@@ -20,5 +18,15 @@ export default function ProductDetails(props: IProductDetailsProps) {
     sendRequest(productId);
   }, [sendRequest]);
 
-  return (details && <Details productDetail={details} />);
-}
+  const addToCartHandler = (e: React.MouseEvent) => {s
+    console.log('add click');
+  };
+
+  return (
+    details && (
+      <Details productDetail={details} addToCart={(e) => addToCartHandler(e)} />
+    )
+  );
+};
+
+export default ProductDetails;

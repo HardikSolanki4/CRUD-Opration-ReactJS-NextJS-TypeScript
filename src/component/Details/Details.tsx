@@ -11,9 +11,10 @@ type props = {
     description: string;
     price: number;
   };
+  addToCart: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Details: React.FC<props> = (productDetail) => {
+const Details: React.FC<props> = (productDetail, addToCart) => {
   console.log('productDetail details==>', productDetail);
   const { category, description, name, picture, price } =
     productDetail.productDetail;
@@ -30,7 +31,9 @@ const Details: React.FC<props> = (productDetail) => {
           <div className='productPrice'>₹{price}</div>
           <div className='productDetails'>{description}</div>
           <Button size='small'>WhishList</Button>
-          <Button size='small'>Buy</Button>
+          <Button size='small' onClick={addToCart}>
+            Add to Cart
+          </Button>
         </div>
       </ProductStyled>
     </>

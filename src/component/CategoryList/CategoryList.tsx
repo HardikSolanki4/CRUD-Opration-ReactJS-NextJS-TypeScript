@@ -60,7 +60,7 @@ const CategoryList: React.FC<Props> = ({ CategoryLists }) => {
             </Grid>
           ))
         ) : (
-          <h2>No Student Found</h2>
+          <h2>No Product Found</h2>
         )}
       </Grid>
     </div>
