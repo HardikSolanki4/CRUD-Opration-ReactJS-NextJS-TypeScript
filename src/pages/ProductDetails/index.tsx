@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Details from '../../component/Details/Details';
@@ -18,14 +19,12 @@ const ProductDetails: React.FC = () => {
     sendRequest(productId);
   }, [sendRequest]);
 
-  const addToCartHandler = (e: React.MouseEvent) => {s
-    console.log('add click');
+  const addToCartHandler = () => {
+    alert('hello');
   };
 
   return (
-    details && (
-      <Details productDetail={details} addToCart={(e) => addToCartHandler(e)} />
-    )
+    details && <Details productDetail={details} onClick={addToCartHandler} />
   );
 };
 
