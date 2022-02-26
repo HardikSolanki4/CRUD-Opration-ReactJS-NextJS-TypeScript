@@ -6,8 +6,8 @@ type props = {
   productDetail: {
     id: string;
     category: string;
-    picture: string;
-    name: string;
+    image: string;
+    title: string;
     description: string;
     price: number;
   };
@@ -16,18 +16,18 @@ type props = {
 
 const Details: React.FC<props> = (props) => {
   console.log('productDetail details==>', props);
-  const { category, description, name, picture, price } =
+  const { category, description, title, image, price } =
   props.productDetail;
 
   return (
     <>
       <ProductStyled>
         <div className='productImg'>
-          <img src={picture} />
+          <img src={image} />
         </div>
         <div className='productDesc'>
           <div className='productCategory'>{category}</div>
-          <div className='productName'>{name}</div>
+          <div className='productName'>{title}</div>
           <div className='productPrice'>₹{price}</div>
           <div className='productDetails'>{description}</div>
           <Button size='small'>WhishList</Button>

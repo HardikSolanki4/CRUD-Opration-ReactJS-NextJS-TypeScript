@@ -1,22 +1,11 @@
 import { useEffect } from 'react';
-import CategoryList from '../../component/CategoryList/CategoryList';
+import CategoryList from './ProductList/ProductList';
 import { useHttp } from '../../hooks/use-http';
 import { getAllProduct } from '../../lib/api';
-import ContentLoader from '../../component/ContentLoader/ContentLoader';
-import ContentError from '../../component/ContentError/ContentError';
+import ContentLoader from '../../Common/ContentLoader/ContentLoader';
+import ContentError from '../../Common/ContentError/ContentError';
 
-interface Props {
-  CategoryLists: {
-    id: any;
-    category: string;
-    picture: string;
-    name: string;
-    description: string;
-    price: number;
-  }[];
-}
-
-const ShopHome: React.FC<Props> = () => {
+const ShopHome = () => {
   const {
     sendRequest,
     status,
@@ -37,8 +26,7 @@ const ShopHome: React.FC<Props> = () => {
 
   // console.log('loadListItems', loadListItems);
 
-
-  return loadListItems && <CategoryList CategoryLists={loadListItems} />;
+  return loadListItems && <CategoryList ProductLists={loadListItems} />;
 };
 
 export default ShopHome;

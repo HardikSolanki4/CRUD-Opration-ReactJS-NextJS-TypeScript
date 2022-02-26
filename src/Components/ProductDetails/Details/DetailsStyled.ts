@@ -2,6 +2,13 @@ import { styled } from '@mui/material/styles';
 
 export const ProductStyled = styled('div')`
   display: flex;
+  .productImg {
+    img {
+      width: 480px;
+      object-fit: contain;
+      height: 300px;
+    }
+  }
   .productDesc {
     padding-left: 30px;
     .productCategory {

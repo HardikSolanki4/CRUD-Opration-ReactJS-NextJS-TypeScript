@@ -1,4 +1,4 @@
-import ShopCart from '../../component/Cart/Cart';
+import ShopCart from './Cart/Cart';
 
 const CheckOutCart = () => {
   return (

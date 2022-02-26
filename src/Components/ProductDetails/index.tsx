@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Details from '../../component/Details/Details';
+import Details from './Details/Details';
 import { useHttp } from '../../hooks/use-http';
 import { getProductDetails } from '../../lib/api';
 

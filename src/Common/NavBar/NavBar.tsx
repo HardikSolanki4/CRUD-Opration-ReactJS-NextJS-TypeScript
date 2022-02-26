@@ -16,8 +16,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 const useStyles = makeStyles({
   header: {
-    background: grey[200],
-    marginBottom: '30px',
+    marginBottom:'30px',
   },
   headerContent: {
     display: 'flex',
@@ -54,7 +53,7 @@ const HeaderNavBar = () => {
   return (
     <div className={classes.header}>
       <Box>
-        <AppBar position='static'>
+        <AppBar position='relative'>
           <Toolbar>
             <div className={classes.headerContent}>
               <div className={classes.headerLeft}>
