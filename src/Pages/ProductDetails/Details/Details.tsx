@@ -1,6 +1,8 @@
 import Button from '@mui/material/Button';
 import { ProductStyled } from './DetailsStyled';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCart, showNotification } from '../../../redux/actions/cartActions';
 
 type props = {
   productDetail: {
@@ -11,13 +13,24 @@ type props = {
     description: string;
     price: number;
   };
-  onClick?: () => void;
 };
 
 const Details: React.FC<props> = (props) => {
-  console.log('productDetail details==>', props);
-  const { category, description, title, image, price } =
-  props.productDetail;
+  const dispatch = useDispatch();
+
+  // console.log('productDetail details==>', props);
+  const { productDetail } = props;
+  const { category, description, title, image, price } = productDetail;
+
+  const addCartHandler = () => {
+    dispatch(addCart(productDetail));
+    dispatch(
+      showNotification({
+        title: 'Cart Updated',
+        message: 'Complete',
+      })
+    );
+  };
 
   return (
     <>
@@ -31,10 +44,7 @@ const Details: React.FC<props> = (props) => {
           <div className='productPrice'>₹{price}</div>
           <div className='productDetails'>{description}</div>
           <Button size='small'>WhishList</Button>
-          <Button
-            size='small'
-            onClick={props.onClick}
-          >
+          <Button size='small' onClick={addCartHandler}>
             Add to Cart
           </Button>
         </div>

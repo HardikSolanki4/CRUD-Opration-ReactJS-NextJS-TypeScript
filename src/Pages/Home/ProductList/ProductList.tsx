@@ -23,7 +23,7 @@ interface Props {
   }[];
 }
 
-const CategoryList: React.FC<Props> = ({ ProductLists }) => {
+const ProductList: React.FC<Props> = ({ ProductLists }) => {
   // console.log('ProductLists:', ProductLists);
 
   const itemClickHandler = (event: React.MouseEvent) => {
@@ -56,4 +56,4 @@ const CategoryList: React.FC<Props> = ({ ProductLists }) => {
   );
 };
 
-export default CategoryList;
+export default ProductList;
