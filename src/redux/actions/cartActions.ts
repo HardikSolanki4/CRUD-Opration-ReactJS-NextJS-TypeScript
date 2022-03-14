@@ -7,6 +7,13 @@ export const addCart = (product: any) => {
   };
 };
 
+export const removeCart = (productId: number) => {
+  return {
+    type: ActionTypes.REMOVE_CART,
+    payload: productId,
+  };
+};
+
 export const showNotification = (info: any) => {
   return {
     type: ActionTypes.SHOW_NOTIFICATION,

@@ -17,6 +17,16 @@ interface actionType {
   payload?: any;
 }
 
+interface cartItemType {
+  id: number;
+  category: string;
+  title: string;
+  image: string;
+  price: number;
+  quantity: number;
+  totalPrice: number;
+}
+
 export const cartReducer = (state = initCart, action: actionType) => {
   switch (action.type) {
     case ActionTypes.ADD_CART:
@@ -42,19 +52,52 @@ export const cartReducer = (state = initCart, action: actionType) => {
       state.cart.grandTotal = state.cart.grandTotal + newItem.price;
       return { ...state };
 
-    case ActionTypes.SHOW_NOTIFICATION:
-      state.notification = {
-        title: action.payload.title,
-        message: action.payload.message,
+    case ActionTypes.REMOVE_CART:
+      const id = action.payload;
+      const existingItem = state.cart.items.find((item: any) => item.id === id);
+      console.log('existingItem', existingItem);
+      if (existingItem) {
+        state.cart.items = state.cart.items.filter(
+          (item: cartItemType) => item.id !== id
+        );
+        state.cart.grandTotal =
+          state.cart.grandTotal - existingItem.price * existingItem.quantity;
+      }
+      console.log('reducer state', state);
+      return {
+        ...state,
+        cart: {
+          items: state.cart.items,
+          grandTotal: state.cart.grandTotal,
+          changed: false,
+        },
       };
-      return { ...state };
+
+    case ActionTypes.SHOW_NOTIFICATION:
+      // state.notification = {
+      //   title: action.payload.title,
+      //   message: action.payload.message,
+      // };
+      return {
+        ...state,
+        notification: {
+          title: action.payload.title,
+          message: action.payload.message,
+        },
+      };
 
     case ActionTypes.HIDE_NOTIFICATION:
-      state.notification = {
-        title: null,
-        message: null,
+      // state.notification = {
+      //   title: null,
+      //   message: null,
+      // };
+      return {
+        ...state,
+        notification: {
+          title: null,
+          message: null,
+        },
       };
-      return { ...state };
 
     default:
       return state;

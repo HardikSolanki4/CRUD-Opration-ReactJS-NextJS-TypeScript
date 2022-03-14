@@ -1,10 +1,13 @@
 import { Button, TextField } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeCart } from '../../../redux/actions/cartActions';
 import { RootState } from '../../../rootReducer';
 import { ShopCartStyled } from './CartStyled';
 
 const ShopCart = () => {
   const cartState = useSelector((state: RootState) => state.cartProducts.cart);
+  const dispatch = useDispatch();
   const { items: cartItems, grandTotal } = cartState;
 
   console.log('cartState', cartState);
@@ -13,8 +16,9 @@ const ShopCart = () => {
   }
 
   const removeHandler = (id: number) => {
-    console.log('remove', id);
+    dispatch(removeCart(id));
   };
+
 
   return (
     <ShopCartStyled>
@@ -27,19 +31,19 @@ const ShopCart = () => {
               <div className='itemName'>{item.title}</div>
               <div className='itemPriceModule'>
                 {/* <div className='quantityModule'>
-          <Button variant='text'>+</Button>
-          <TextField
-            label='Quantity'
-            variant='outlined'
-            defaultValue='1'
-            className='quantityInput'
-            type='number'
-            InputProps={{
-              readOnly: true,
-            }}
-          />
-          <Button variant='text'>-</Button>
-        </div> */}
+                      <Button variant='text'>+</Button>
+                      <TextField
+                        label='Quantity'
+                        variant='outlined'
+                        defaultValue='1'
+                        className='quantityInput'
+                        type='number'
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                      />
+                      <Button variant='text'>-</Button>
+                    </div> */}
                 <div className='price'>
                   {item.price}
                   <small>x{item.quantity}</small>
